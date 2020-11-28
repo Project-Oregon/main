@@ -24,6 +24,11 @@ def book_tickets():
         result = execute_query(db_connection, query).fetchall()
         print(f"All Pods in DB: {result}")
 
+        query = 'SELECT locationID, description FROM Locations;'
+        db_connection = connect_to_database()
+        result = execute_query(db_connection, query).fetchall()
+        render_template('book_ticket.html', rows=result)
+
     if request.method == 'POST':
         firstName = request.form['firstName']
         lastName = request.form['lastName']

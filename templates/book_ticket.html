@@ -59,8 +59,9 @@
 				<div class="col-md-3 mb-3">
 					<label for="validationDefault04">Destination</label> <select class="custom-select" id="validationDefault04" required="true" name="destination">
 						<option disabled selected value="">Select</option>
-						<option>Eugene</option>
-						<option>Bend</option>
+						{% for destination in rows %}
+							<option>{{destination[1]}}</option>
+						{% endfor %}
 					</select>
 				</div>
 			</div>
