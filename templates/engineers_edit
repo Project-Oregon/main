@@ -95,7 +95,7 @@
 					<form id="editEngineer" action="/engineers.html" method="POST" style="display: inline">
 						<div class="form-row">
 								<div class="col-md-3 mb-3">
-									<label for="validationDefault05">EngineerID</label> <select class="custom-select" id="validationDefault05" required="true" name="engineerID">
+									<label for="validationDefault05">EngineerID</label> <select class="custom-select" id="validationDefault07" required="true" name="engineerID">
 										<option disabled selected value="">Select</option>
 											{% for engineer in rows %}
 											<option>{{engineer[0]}}</option>
@@ -109,17 +109,54 @@
 								</div>
 							</form>
 				</div>
-			</div>	
-		</br>	
+			</div>		
 
-						
-
+					
+							<form id="editEngineer" action="/edit_engineer.html" method="POST" style="display: inline">
+								<div class="form-row">
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationDefault05">ID</label> <input class="form-control" id="validationDefault08" required="true" type="text" name="engineerID" 
+                                        value= {% for engineer in eng %}
+                                        {{engineer[0]}}
+                                        {% endfor %} readonly>
+                                        
+                                    </div>
+											<div class="col-md-6 mb-3">
+												<label for="validationDefault05">First name</label> <input class="form-control" id="validationDefault09" required="true" type="text" name="firstName" 
+												value= {% for engineer in eng %}
+												{{engineer[1]}}
+                                                {% endfor %}>
+                                            
+												
+											</div>
+											<div class="col-md-6 mb-3">
+												<label for="validationDefault06">Last name</label> <input class="form-control" id="validationDefault10" required="true" type="text" name="lastName"
+												value = 
+												{% for engineer in eng %}
+												{{engineer[2]}}
+												{% endfor %}>
+											</div>
+											<div class="col-md-3 mb-3">
+												<label for="validationDefault07">Available</label> <select class="custom-select" id="validationDefault11" required="true" name="available">
+													<option disabled selected value="">Select</option>
+													<option>0</option>
+													<option>1</option>
+												</select>
+											</div>
+										</div>
+						  <div class="form-group">
+							<div class="form-check"> </div>
+							<input type="submit" class ="btn btn-primary btn-dark" value="Submit Edit">
+							</form>
+                
+                            <br>
+            
 			  <div class="collapse" id="removeEngineer">
 				<div class="card card-body">
 					<form id="removeEngineer" action="/remove_engineers.html" method="POST" style="display: inline">
 					<div class="form-row">
 							<div class="col-md-3 mb-3">
-								<label for="validationDefault05">EngineerID</label> <select class="custom-select" id="validationDefault05" required="true" name="engineerID">
+								<label for="validationDefault05">EngineerID</label> <select class="custom-select" id="validationDefault12" required="true" name="engineerID">
 									<option disabled selected value="">Select</option>
 										{% for engineer in rows %}
 										<option>{{engineer[0]}}</option>
