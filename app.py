@@ -98,7 +98,7 @@ def engineer_pods():
         return redirect(url_for('engineer_pods'))
 
 @app.route('/remove_eng_pod.html', methods=['POST'])
-def removeEngPod():
+def remove_end_pod():
     print('werein')
     engIDpodID = request.form['engineerID_podID']
     engID = ""
@@ -132,7 +132,7 @@ def removeEngPod():
 
 
 @app.route('/remove_engineers.html', methods=['POST'])
-def removeEngineers():
+def remove_engineer():
     engineerID = request.form['engineerID']
     print(engineerID)
     db_connection = connect_to_database()
@@ -143,6 +143,27 @@ def removeEngineers():
     print(f"All Engineers in DB: {result}")
     return render_template('engineers.html', rows= result)
         
+
+@app.route('/edit_engineer.html', methods=['POST'])
+def edit_engineer():  # submit edits for engineer 
+    firstName = request.form['firstName']
+    lastName = request.form['lastName']
+    engineerID = request.form['engineerID']
+    if request.form['available'] == 0:
+        available = 'true'
+    else:
+        available = 'false'
+    db_connection = connect_to_database()
+
+    query = "UPDATE Service_Engineers SET firstName = '%s', lastName = '%s', available = %s WHERE engineerID = '%s';" %(firstName, lastName, available, engineerID)
+    print(query)
+    execute_query(db_connection, query).fetchall()
+
+    query = "SELECT engineerID, firstName, lastName, available FROM Service_Engineers;"
+    result = execute_query(db_connection, query).fetchall()
+    print(f"All Engineers in DB: {result}")
+    return render_template('engineers.html', rows= result)
+
 @app.route('/engineers.html', methods=['POST', 'GET'])
 def engineers():
     if request.method == 'GET':
@@ -151,6 +172,19 @@ def engineers():
         result = execute_query(db_connection, query).fetchall()
         print(f"All Engineers in DB: {result}")
         return render_template('engineers.html', rows=result)
+ 
+    if request.method == 'POST' and 'engineerID' in request.form:    # populate default data for engineer
+        engineerID = request.form['engineerID']
+        db_connection = connect_to_database()
+        query = "SELECT * FROM Service_Engineers WHERE engineerID = '%s'" %(engineerID)
+        print(query)
+        eng = execute_query(db_connection, query).fetchall()
+        print(eng)
+        
+        query = "SELECT engineerID, firstName, lastName, available FROM Service_Engineers;"
+        result = execute_query(db_connection, query).fetchall()
+        print(f"All Engineers in DB: {result}")
+        return render_template('engineers_edit.html', rows= result, eng=eng)
 
     if request.method == 'POST' and 'firstName' in request.form:
         firstName = request.form['firstName']
