@@ -40,14 +40,16 @@
 			<thead>
 				<tr>
 					<th scope="col">engineerID</th>
+					<th scope="col">engineerName</th>
 					<th scope="col">podID</th>
 				</tr>
 			</thead>
 			<tbody>
-				{% for EP in rows %}
+				{% for eng_pod in joinresults %}
 				<tr>
-					<td>{{EP[0]}}</td>
-					<td>{{EP[1]}}</td>
+					<td>{{eng_pod[0]}}</td>
+					<td>{{eng_pod[1]}} {{eng_pod[2]}}</td>
+					<td>{{eng_pod[3]}}</td>
 				</tr>
 				{% endfor %}
 			</tbody>

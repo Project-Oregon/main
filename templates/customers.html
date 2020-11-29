@@ -43,17 +43,19 @@
 					<th scope="col">firstName</th>
 					<th scope="col">lastName</th>
 					<th scope="col">currentPod</th>
-					<th scope="col">destination</th>
+					<th scope="col">destinationID</th>
+					<th scope="col">destinationDescription</th>
 				</tr>
 			</thead>
 			<tbody>
-				{% for customer in rows %}
+				{% for jointresult in rows %}
 				<tr>
-					<td>{{customer[0]}}</td>
-					<td>{{customer[1]}}</td>
-					<td>{{customer[2]}}</td>
-					<td>{{customer[3]}}</td>
-					<td>{{customer[4]}}</td>
+					<td>{{jointresult[0]}}</td>
+					<td>{{jointresult[1]}}</td>
+					<td>{{jointresult[2]}}</td>
+					<td>{{jointresult[3]}}</td>
+					<td>{{jointresult[4]}}</td>
+					<td>{{jointresult[5]}}</td>
 				</tr>
 				{% endfor %}
 			</tbody>
